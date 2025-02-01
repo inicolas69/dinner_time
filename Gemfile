@@ -56,7 +56,9 @@ gem "concurrent-ruby", "1.3.4"
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "awesome_print"
+  gem "factory_bot_rails"
   gem "pry-rails"
+  gem "rspec-rails"
 end
 
 group :development do
@@ -74,8 +76,6 @@ group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
   gem "database_cleaner"
-  gem "factory_bot_rails"
-  gem "rspec-rails"
   gem "selenium-webdriver"
   gem "shoulda-matchers"
 end
