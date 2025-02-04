@@ -1,0 +1,17 @@
+<%= form_with url: recipes_path, method: :get, local: true do %>
+  <div class="mb-4">
+    <%= label_tag :search, "Search for a recipe:" %>
+    <%= text_field_tag :search, params[:search], class: "form-input mt-1 block w-full" %>
+  </div>
+  <%= label_tag :ingredient_categories, "Filter by ingredient categories:" %>
+  <%= select_tag :ingredient_categories, options_for_select(@ingredient_categories.pluck(:name, :id), params[:ingredient_categories]), multiple: true, class: "form-multiselect mt-1 block w-full" %>
+  <div>
+    <%= submit_tag "Search", class: "btn btn-primary" %>
+  </div>
+<% end %>
+
+<div class="grid grid-cols-2 w-full gap-4">
+  <% @recipes.each do |recipe| %>
+    <%= render(Recipe::Card::Component.new(recipe: recipe)) %>
+  <% end %>
+</div>
