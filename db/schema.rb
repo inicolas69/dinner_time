@@ -31,6 +31,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_02_04_142214) do
     t.string "quantity", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "additional_informations"
     t.index ["ingredient_id"], name: "index_recipe_ingredients_on_ingredient_id"
     t.index ["recipe_id"], name: "index_recipe_ingredients_on_recipe_id"
   end
@@ -41,7 +42,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_02_04_142214) do
     t.integer "prep_time", null: false
     t.integer "total_time", null: false
     t.float "rating", null: false
-    t.string "cuisine"
+    t.string "cuisine", default: ""
     t.string "image_url", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
