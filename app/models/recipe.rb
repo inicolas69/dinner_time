@@ -1,6 +1,7 @@
 class Recipe < ApplicationRecord
   has_many :recipe_ingredients
   has_many :ingredients, through: :recipe_ingredients
+  has_many :ingredient_categories, through: :ingredients
 
   validates :title, :cook_time, :prep_time, :rating, :image_url, presence: true
 

@@ -8,6 +8,7 @@ describe Recipe do
   it { should validate_presence_of(:image_url) }
   it { should have_many(:recipe_ingredients) }
   it { should have_many(:ingredients).through(:recipe_ingredients) }
+  it { should have_many(:ingredient_categories).through(:ingredients) }
 
   context "on create or update" do
     context "when cook_time or prep_time changes" do
