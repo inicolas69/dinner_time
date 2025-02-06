@@ -13,9 +13,13 @@
     <script src="https://cdn.jsdelivr.net/npm/tom-select@2.4.2/dist/js/tom-select.complete.min.js"></script>
   </head>
 
-  <body>
-    <main class="mx-auto mt-28 px-5 container">
+  <body class="py-8 bg-[#DDDDCB]/20">
+    <div class="container flex px-2 mx-auto mb-8 items-center shadow-lg lg:py-8 lg:px-24 lg:max-w-7xl rounded-xl bg-[#DDDDCB] justify-center gap-4">
+      <%= image_tag("logo.jpg", class: "w-24 h-24") %>
+      <h1 class="text-4xl font-bold">Dinner Time !</h1>
+    </div>
+    <div class="container px-2 mx-auto bg-white shadow-lg lg:py-8 lg:px-24 lg:max-w-7xl rounded-xl">
       <%= yield %>
-    </main>
+    </div>
   </body>
 </html>
