@@ -1,19 +1,29 @@
 class RecipesController < ApplicationController
   def index
-    @recipes = Recipe.all.first(24)
+    @recipes = Recipe.all
     @ingredient_categories = IngredientCategory.all
 
     if params[:ingredient_categories].present?
-      categories = IngredientCategory.where(id: params[:ingredient_categories])
+      category_ids = search_params[:ingredient_categories]
 
-      @recipes = Recipe.joins(ingredients: :ingredient_category)
-        .where(ingredient_categories: { id: categories.pluck(:id) })
+      @recipes = @recipes.joins(ingredients: :ingredient_category)
+        .where(ingredient_categories: { id: category_ids })
         .group("recipes.id")
-        .having("COUNT(DISTINCT ingredient_categories.id) = ?", categories.count)
+        .having("COUNT(DISTINCT ingredient_categories.id) = ?", category_ids.count)
+    elsif params[:query].present?
+      @recipes = @recipes.pg_search(params[:query])
     end
+
+    @recipes = @recipes.page(params[:page]).per(12)
   end
 
   def show
     @recipe = Recipe.find(params[:id])
+  end
+
+  private
+
+  def search_params
+    params.permit(:search, ingredient_categories: [])
   end
 end
