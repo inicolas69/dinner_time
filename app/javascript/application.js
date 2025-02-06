@@ -5,4 +5,9 @@ new TomSelect("#ingredient_categories", {
   onItemAdd: function () {
     this.setTextboxValue("");
   },
+  plugins: {
+    remove_button: {
+      title: "Remove this ingredient",
+    },
+  },
 });

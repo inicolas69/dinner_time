@@ -53,6 +53,8 @@ gem "bootsnap", require: false
 # gem "image_processing", "~> 1.2"
 
 gem "concurrent-ruby", "1.3.4"
+gem "kaminari"
+gem "pg_search"
 gem "view_component"
 
 group :development, :test do
