@@ -1,8 +1,8 @@
-<%= form_with url: recipes_path, method: :get, local: true do %>
+<%= form_with url: recipes_path, method: :get, local: true do |form| %>
   <div class="grid items-center grid-cols-1 gap-4 p-4 mb-8 border border-[#DDDDCB] lg:grid-cols-2 rounded-xl">
     <div class="col-span-2 mb-4">
       <%= label_tag :query, "Search for a recipe:" %>
-      <%= text_field_tag :query, params[:query], class: "border-[#DDDDCB] rounded mt-1  w-full" %>
+      <%= form.text_field :query, value: params[:query], class: "border-[#DDDDCB] rounded mt-1  w-full" %>
     </div>
 
     <div class="flex col-span-2 mb-2">
@@ -13,19 +13,57 @@
 
     <div class="col-span-2 mb-4">
       <%= label_tag :ingredient_categories, "Filter by ingredients:" %>
-      <%= select_tag :ingredient_categories, options_for_select(@ingredient_categories.pluck(:name, :id), params[:ingredient_categories]), multiple: true, class: "mt-1 block w-full rounded border-[#DDDDCB]" %>
+      <%= form.select :ingredient_categories, options_for_select(@ingredient_categories.pluck(:name, :id).sort, params[:ingredient_categories]), {include_blank: false, include_hidden: false}, {multiple: true, class: "mt-1 block w-full rounded border-[#DDDDCB]"} %>
+    </div>
+
+    <div class="col-span-2 peer">
+      <input type="checkbox" id="view_more" class="hidden peer" />
+      <label for="view_more" class="flex items-center justify-between cursor-pointer group">
+        <div class="flex items-center justify-center w-full">
+          <span class="text-sm">More filters</span>
+          <span class="mx-2 transition duration-500 rotate-0 peer-checked:group-[]:rotate-180"><%= image_tag "arrow-down.png", class: "w-4 rotate-90" %></span>
+        </div>
+      </label>
+    </div>
+
+    <div class="max-h-0 overflow-hidden transition-all duration-500 peer-has-[:checked]:max-h-screen col-span-2">
+      <div class="grid items-center grid-cols-1 gap-4 lg:grid-cols-2">
+        <div class="col-span-1 mb-4">
+          <%= label_tag :total_time, "Filter by duration:" %>
+          <div class="grid items-center grid-cols-2 gap-1">
+            <% [["No preference", ""],["Less than 30 min", 30], ["Less than 1 hour", 60], ["Less than 2 hours", 120]].each do |option| %>
+              <p class="flex items-center justify-center">
+                <%= form.radio_button :total_time, option.last, checked: params[:total_time] == option.last.to_s, class: "peer hidden" %>
+                <%= form.label :total_time, option.first, value: option.last, class: "bg-transparent cursor-pointer gap-2 border border-[#DDDDCB]/70 px-2 py-1 rounded-sm peer-checked:bg-[#DDDDCB]/70 peer-checked:border-[#DDDDCB] peer-hover:bg-[#DDDDCB]/70 peer-hover:border-[#DDDDCB] rounded w-full text-center" %>
+              </p>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="col-span-1 mb-4">
+          <%= label_tag :sort, "Sort by:" %>
+          <div class="grid items-center grid-cols-2 gap-1">
+            <% [["Newest", "newest"],["Oldest", "oldest"], ["Rating", "rating"], ["Total tile", "total_time"]].each do |option| %>
+              <p class="flex items-center justify-center">
+                <%= form.radio_button :sort, option.last, checked: params[:sort] == option.last.to_s, class: "peer hidden" %>
+                <%= form.label :sort, option.first, value: option.last, class: "bg-transparent cursor-pointer gap-2 border border-[#DDDDCB]/70 px-2 py-1 rounded-sm peer-checked:bg-[#DDDDCB]/70 peer-checked:border-[#DDDDCB] peer-hover:bg-[#DDDDCB]/70 peer-hover:border-[#DDDDCB] rounded w-full text-center" %>
+              </p>
+            <% end %>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="col-span-2 text-center">
-      <%= submit_tag "Search", class: "bg-transparent hover:bg-[#DDDDCB]/70 text-black font-semibold py-2 px-4 border border-[#DDDDCB] hover:border-transparent cursor-pointer rounded" %>
+      <%= form.submit "Search", class: "bg-[#DDDDCB] hover:bg-[#DDDDCB]/70 text-black font-semibold py-2 px-4 cursor-pointer rounded" %>
     </div>
   </div>
 <% end %>
 
-<div class="grid w-full grid-cols-1 gap-4 lg:grid-cols-4">
+<div class="grid w-full grid-cols-1 gap-4 lg:grid-cols-3">
   <% @recipes.each do |recipe| %>
     <%= render(Recipe::Card::Component.new(recipe: recipe)) %>
   <% end %>
 </div>
 
-<%= paginate @recipes %>
+<%= paginate @recipes, window: 1 %>
