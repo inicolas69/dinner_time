@@ -1,4 +1,4 @@
-file = URI.open("https://gist.github.com/inicolas69/82c8f65161a31f35ce34177764e2a038/raw/4b4368e8974b5cbc63088e20c826f215b278f476/recipes.json").read
+file = URI.open("https://gist.github.com/inicolas69/82c8f65161a31f35ce34177764e2a038/raw/d3135dc626eedc790f0e934bf8f1c5cd5064d4ca/recipes.json").read
 json = JSON.parse(file)
 
 json.each do |recipe|
@@ -7,6 +7,7 @@ json.each do |recipe|
     cook_time: recipe["cook_time"].to_i,
     prep_time: recipe["prep_time"].to_i,
     rating: recipe["ratings"].to_f,
+    category: recipe["category"],
     image_url: CGI.unescape(recipe["image"].split("?url=").last),
   )
 
@@ -26,6 +27,7 @@ json.each do |recipe|
       ingredient: new_ingredient,
       quantity: ingredient["quantity"],
       additional_informations: ingredient["additional_informations"],
+      unit: ingredient["unit"],
     )
   end
 end
