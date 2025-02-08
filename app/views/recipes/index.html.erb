@@ -43,7 +43,7 @@
         <div class="col-span-1 mb-4">
           <%= label_tag :sort, "Sort by:" %>
           <div class="grid items-center grid-cols-2 gap-1">
-            <% [["Newest", "newest"],["Oldest", "oldest"], ["Rating", "rating"], ["Total tile", "total_time"]].each do |option| %>
+            <% [["Newest", "newest"],["Oldest", "oldest"], ["Rating", "rating"], ["Total time", "total_time"]].each do |option| %>
               <p class="flex items-center justify-center">
                 <%= form.radio_button :sort, option.last, checked: params[:sort] == option.last.to_s, class: "peer hidden" %>
                 <%= form.label :sort, option.first, value: option.last, class: "bg-transparent cursor-pointer gap-2 border border-[#DDDDCB]/70 px-2 py-1 rounded-sm peer-checked:bg-[#DDDDCB]/70 peer-checked:border-[#DDDDCB] peer-hover:bg-[#DDDDCB]/70 peer-hover:border-[#DDDDCB] rounded w-full text-center" %>
