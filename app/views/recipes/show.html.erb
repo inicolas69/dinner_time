@@ -1,0 +1,26 @@
+<div class="grid w-full gap-4 lg:grid-cols-2">
+  <div class="relative">
+    <%= image_tag(@recipe.image_url, class: "object-cover  w-full rounded-xl aspect-square") %>
+    <span class="absolute top-2 left-2 px-2 py-1 rounded-xl bg-[#372A20] text-white font-bold"><%= @recipe.category %></span>
+  </div>
+  <div class="flex flex-col gap-8 p-1 lg:pl-4 justify-evenly">
+    <h1 class="text-3xl font-bold lg:text-5xl"><%= @recipe.title %></h1>
+    <div class="grid grid-cols-2 border p-1 rounded border-[#DDDDCB]/80">
+      <div class="flex flex-col items-center p-1 border-b border-r border-[#DDDDCB]/80"><span class="font-bold">Preparation time:</span><span><%= @recipe.prep_time %> min</span></div>
+      <div class="flex flex-col items-center p-1 border-b border-l border-[#DDDDCB]/80"><span class="font-bold">Cooking time:</span><span><%= @recipe.cook_time %> min</span></div>
+      <div class="flex flex-col items-center p-1 border-t border-r border-[#DDDDCB]/80"><span class="font-bold">Total time:</span><span><%= @recipe.total_time %> min</span></div>
+      <div class="flex flex-col items-center p-1 border-t border-l border-[#DDDDCB]/80"><span class="font-bold">Rating:</span><span><%= @recipe.rating %> / 5</span></div>
+    </div>
+    <div class="grid grid-cols-2 gap-4">
+      <% @ingredients.each do |ingredient| %>
+        <div class="flex items-center pl-2 border-l-4 border-[#DDDDCB]/80">
+          <p><%= ingredient.full_ingredient %></p>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <div class="flex flex-col items-center p-1 pl-8 mb-8 lg:col-span-2">
+    <p class="text-2xl font-bold lg:text-4xl">Instructions</p>
+    <p class="mt-8 text-xl italic">Coming soon ...</p>
+  </div>
+</div>
