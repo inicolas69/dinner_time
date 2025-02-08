@@ -54,6 +54,7 @@ gem "bootsnap", require: false
 
 gem "concurrent-ruby", "1.3.4"
 gem "kaminari"
+gem "meta-tags"
 gem "pg_search"
 gem "view_component"
 
