@@ -1,24 +1,9 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## User stories
 
-Things you may want to cover:
+* As a user, I want to search specific recipes by name so that I can quickly find my favorite dish.
 
-* Ruby version
+* As a user, I want to enter the ingredients I have at home so that I can find recipes that use what I already have.
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* As a user, I want to filter recipes by total cooking time so that I can choose a recipe that fits into my schedule.
